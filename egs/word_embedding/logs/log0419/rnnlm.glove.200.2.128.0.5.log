@@ -1,0 +1,22 @@
+./run_newlm.sh --the-lm rnnlm --embed-method glove --hidden-size 200 --num-layers 2 --batch-size 128 --keep-prob 0.5 --max-epoch 25
+=====================================================================================
+Usage of this scipt:
+  ./run_newlm.sh <the-lm>(language-model) <embed-method>(embedding-method)
+The scipt provides three kinds of language model and three embedding methods as well
+	Language Models: rnnlm lstmlm fast(lstm_fast) 
+	Embedding Methods: skipgram cbow glove 
+If you want to train the word embeddings during the neural network training: 
+  the embedding method can be set as base, which means it is the basic method.
+For example: 
+  ./run_newlm.sh --the-lm rnnlm --embed-method skipgram
+=====================================================================================
+-----------------------------------
+     Train/Dev Data Preparation    
+-----------------------------------
+Getting train and validation sets.
+-----------------------------------
+     Data Preparation Finished!    
+-----------------------------------
+-----------------------------------
+  Vocabulary Preparation Finished! 
+-----------------------------------
