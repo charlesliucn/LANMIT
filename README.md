@@ -2,7 +2,7 @@
 
 This repository provides Kaldi users with a few useful scripts for **language modeling**, especially for speech recognition under **low-resourced conditions**.
 
-![image](https://github.com/charlesliucn/kaldi-lm/tree/master/misc/logo/framework.png)
+![image](http://nbviewer.jupyter.org/github/charlesliucn/kaldi-lm/blob/master/misc/logo/framework.png)
 
 The scripts are mainly based on `babel/s5d` in `./egs` directory.
 
