@@ -1,12 +1,12 @@
 ## Low-resourced Language Modeling based on Kaldi
 
-This repository provides Kaldi users with a few useful scripts for **language modeling**, especially for speech recognition under **low-resourced conditions**.
+This repository provides Kaldi users with a few useful scripts for **language modeling**, especially for **low-resourced conditions**.
 
 ![image](http://nbviewer.jupyter.org/github/charlesliucn/kaldi-lm/blob/master/misc/logo/framework.png)
 
 The scripts are mainly based on `babel/s5d` in `./egs` directory.
 
-Most of the scripts are in `babel/s5d` and `wsj/s5/steps` directories.
+Most of the scripts are in `babel/s5d` and `wsj/s5/steps`.
 
 * * *
 
