@@ -1,0 +1,577 @@
+./run_newlm.sh --the-lm lstm --embed-method skipgram --hidden-size 200 --num-layers 1 --batch-size 64 --keep-prob 0.8 --max-epoch 25
+=====================================================================================
+Usage of this scipt:
+  ./run_newlm.sh <the-lm>(language-model) <embed-method>(embedding-method)
+The scipt provides three kinds of language model and three embedding methods as well
+	Language Models: rnnlm lstmlm fast(lstm_fast) 
+	Embedding Methods: skipgram cbow glove 
+If you want to train the word embeddings during the neural network training: 
+  the embedding method can be set as base, which means it is the basic method.
+For example: 
+  ./run_newlm.sh --the-lm rnnlm --embed-method skipgram
+=====================================================================================
+-----------------------------------
+     Train/Dev Data Preparation    
+-----------------------------------
+Getting train and validation sets.
+-----------------------------------
+     Data Preparation Finished!    
+-----------------------------------
+-----------------------------------
+  Vocabulary Preparation Finished! 
+-----------------------------------
+Embed size: [128, 200]
+Initialized!
+Averge loss at step 0: 7.844662
+Nearest to კი: გადაიარა, მეჭორავო, დასეირნობ, ალეკო, ცირასთვის, ექვსიაო, გამოგიგზავნითო, ხელები,
+Nearest to არ: გადასცდა, მოიფიქრო, გადაიხდიო, საქმიანი, ხელშეწყობა, მოდგებიან, ლუკა, მაქსიმალურიდან,
+Nearest to შენ: გოჩ, მობილობასთან, დარჩა, იფხენს, სიცხეც, საჰაერო, ჯართობაა, ჩამოვიტანთ,
+Nearest to ცოტა: მიაღწევს, შეეშინდეს, მათემატიკაც, ლოვანში, მოვხვდებოდი, შემსრულებელი, ველოდებოდიო, ბუღალტერიით,
+Nearest to სად: გააფრთხილეთო, დელეგაციაცო, აბაზანის, წაიღეს, გათიშულია, რუსთავზე, ვჩალიჩობ, ზამირამ,
+Nearest to მაშინ: ტუფლიო, დედაჩემისკენ, ორშაბათია, გეკარგება, ჩამოგაგორონ, ანკეტები, თერთმეტამდე, ნაკრებიც,
+Nearest to გინდა: აიღებდნენ, გასვლა-გამოსვლა, აარტყი, დალბეს, გვიან, გავყვეთ, რამეო, მოგაწოდა,
+Nearest to გოგო: სოსოც, ავიღოთო, გაასწორე, სტკივა, გაგრძელება, გამიშალო, დავიყინებით, გამეორებით,
+Nearest to ვშვრები: პარასკევია, გამოცდაში, ვფენდი, სანტიმეტრი, დანგრატით, ტრაქტორმა, აქეთო, საღამოობით,
+Nearest to წამოხვალ: მრავალი, დეპარტამენტმა, დამირეკა, ნინიმ, აღარავინ, ნინუკასთვის, ლოვანში, იცოდე,
+Nearest to ვისვენებ: კუხნას, ამოვედი, გატესტეო, დედამ, ღონისძიებაა, შევუთავსებ, თერჯოლისკენ, თეამ,
+Nearest to გვარი: დაიკეტაო, ხახვზე, ვისაშია, დავითიანმა, ყოფილი, ტვინიო, მაგდაგვარი, აი_ფონებზე,
+Nearest to წნევა: გამომიწერე, სმა-ჭამის, წვამდა, კაპიკები, ვეფხოს, ამბებია, მეათეში, ფერიანებიან,
+Nearest to მაქედან: ნანის, მომიგეს, დედიკოც, ხუმრობებიო, თხუთმეტი, იფიქრებ, დანაწვავი, ვიყიდე,
+Nearest to ცოლის: მგელი, ეკუთვნის, გამოიწვია, გაგო, სიცივეები, მოგყიდის, ჟინჟილაშვილი, ლიანა,
+Nearest to შუა: მიხსენებ, შტეფცელი, გაგიზრდია, მშობელია, აღება, მოუვიდეთ, დავპატიჟებ, ვცვლიდი,
+Averge loss at step 2000: 4.342032
+Averge loss at step 4000: 3.938024
+Averge loss at step 6000: 3.747748
+Averge loss at step 8000: 3.527394
+Averge loss at step 10000: 3.531800
+Nearest to კი: არა, ბატონო, ადიდასი, ეხვეწე, ცხოველი, მესმის, გვაცინა, ერჩი,
+Nearest to არ: აღარ, ნახავს, სიხარულში, აღების, გადასცდა, მაღლებიც, იმერული, ჯღარკავა,
+Nearest to შენ: გოჩ, იფხენს, სულაც, მე, მობილობასთან, <unk>, რაოდენობის, გიპასუხე,
+Nearest to ცოტა: შეეშინდეს, წვნიანია, ხალხიცაა, ბუღალტერიით, მათემატიკაც, ცხვირები, გამაღვიძეთო, მილოცავენ,
+Nearest to სად: აბაზანის, რუსთავზე, გავძელი, დავწურავ, გააფრთხილეთო, შევაზავებთ, მოათვალიერეთ, შესაცვლელი,
+Nearest to მაშინ: ტუფლიო, ჩამოგაგორონ, გეკარგება, მოუგებს, ორშაბათია, ღადაობდნენ, შემოსული, მუხის,
+Nearest to გინდა: დალბეს, აარტყი, მინდა, მოგასწრებენ, არჩევანია, გავყვეთ, ტრენინგს, თამლიანი,
+Nearest to გოგო: სოსოც, გაგრძელება, ჩამოგაგორონ, სექტემბერს, დაელაპარაკო, ავიღოთო, სხვათაშორის, კოსმოსში,
+Nearest to ვშვრები: სანტიმეტრი, პარასკევია, ვფენდი, სოდაც, გამოცდაში, გნახო, მილიონს, დავისვი,
+Nearest to წამოხვალ: მრავალი, დამირეკა, დეპარტამენტმა, აღარავინ, ნინიმ, ლოვანში, ჩასვლა, მესის,
+Nearest to ვისვენებ: კუხნას, გატესტეო, ამოვედი, ქუჩის, მ, ღონისძიებაა, შევუთავსებ, დედამ,
+Nearest to გვარი: ხახვზე, დაიკეტაო, ვისაშია, ყოფილი, დავითიანმა, მაგდაგვარი, ტვინიო, აი_ფონებზე,
+Nearest to წნევა: გამომიწერე, სმა-ჭამის, წვამდა, კაპიკები, ფერიანებიან, ვეფხოს, ძმა, მეათეში,
+Nearest to მაქედან: ნანის, ხუმრობებიო, მომიგეს, თხუთმეტი, დედიკოც, დანაწვავი, ვიყიდე, თქვეს,
+Nearest to ცოლის: მგელი, ეკუთვნის, გაგო, გამოიწვია, ივანეს, მოგყიდის, სიცივეები, ჟინჟილაშვილი,
+Nearest to შუა: მიხსენებ, შტეფცელი, გაგიზრდია, მშობელია, დავპატიჟებ, აღება, ვცვლიდი, რემონტში,
+Averge loss at step 12000: 3.368896
+Averge loss at step 14000: 3.307868
+Averge loss at step 16000: 3.301544
+Averge loss at step 18000: 3.168518
+Averge loss at step 20000: 3.167703
+Nearest to კი: არა, ადიდასი, ბატონო, გვაცინა, ალეკო, ეხვეწე, დოლიძეზე, დავახასიათო,
+Nearest to არ: აღარ, მაღლებიც, დიაგნოზის, ჩაგერთო, გადაეღო, ჩაგწერსო, სიხარულში, მოდგებიან,
+Nearest to შენ: გოჩ, სულაც, უღალატა, მობილობასთან, პასპორტში, ნინო, ჟანრმაც, ვეგდე,
+Nearest to ცოტა: შეეშინდეს, ხალხიცაა, გამაღვიძეთო, წვნიანია, ცხვირები, ბუღალტერიით, ლოვანში, პრინცის,
+Nearest to სად: ნაკრების, აბაზანის, რუსთავზე, პაროლით, შევაზავებთ, დავწურავ, წაიღეს, მოათვალიერეთ,
+Nearest to მაშინ: ტუფლიო, ჩამოგაგორონ, გეკარგება, მოუგებს, ორშაბათია, დააგდო, გამოიწერო, მოამზადე,
+Nearest to გინდა: მინდა, დალბეს, ტრენინგს, პატრულის, აარტყი, არჩევანია, მოგასწრებენ, მიიღე,
+Nearest to გოგო: სოსოც, უარს, ჩამოგაგორონ, უშრობ, სექტემბერს, გაგრძელება, ბოთლი, კოსმოსში,
+Nearest to ვშვრები: სანტიმეტრი, სოდაც, პარასკევია, გნახო, მილიონს, დაველაპარაკებით, დავისვი, ვფენდი,
+Nearest to წამოხვალ: მრავალი, დამირეკა, დეპარტამენტმა, აღარავინ, ჩასვლა, ნინიმ, ლოვანში, მესის,
+Nearest to ვისვენებ: კუხნას, გატესტეო, ამოვედი, მ, ქუჩის, ღონისძიებაა, მახოსი, წაუღიათ,
+Nearest to გვარი: ხახვზე, ვისაშია, დაიკეტაო, ტვინიო, მაგდაგვარი, ყოფილი, დავითიანმა, გადააკეთოს,
+Nearest to წნევა: ფერიანებიან, წვამდა, კაპიკები, გამომიწერე, ვეფხოს, სმა-ჭამის, მეგალაინში, მეათეში,
+Nearest to მაქედან: ნანის, ხუმრობებიო, მომიგეს, თხუთმეტი, დანაწვავი, დედიკოც, ვიყიდე, ურტყამს,
+Nearest to ცოლის: მგელი, ეკუთვნის, გაგო, ივანეს, გამოიწვია, რვაას, მოგყიდის, ჟინჟილაშვილი,
+Nearest to შუა: მიხსენებ, გაგიზრდია, შტეფცელი, მშობელია, დავპატიჟებ, ვცვლიდი, გამოვარდაო, აღება,
+Averge loss at step 22000: 3.124589
+Averge loss at step 24000: 3.060567
+Averge loss at step 26000: 3.064948
+Averge loss at step 28000: 3.000825
+Averge loss at step 30000: 2.992163
+Nearest to კი: ადიდასი, დოლიძეზე, გვაცინა, ბატონო, არა, ალეკო, მაკას, ერჩი,
+Nearest to არ: აღარ, ჩაგერთო, მაღლებიც, მოდგებიან, ჩამოუვიდა, დიაგნოზის, გადაეღო, ჩაგწერსო,
+Nearest to შენ: გოჩ, სულაც, მობილობასთან, ვეგდე, გიპასუხე, პასპორტში, უღალატა, ნონასაც,
+Nearest to ცოტა: ხალხიცაა, შეეშინდეს, მიადევნეს, გამაღვიძეთო, ლოვანში, ცხვირები, უკვეო, გამოაგდებენ,
+Nearest to სად: პაროლით, აბაზანის, ნაკრების, გასულიყო, დავწურავ, მოათვალიერეთ, წაიღეს, წამოგიყვან,
+Nearest to მაშინ: ტუფლიო, ჩამოგაგორონ, დააგდო, მოუგებს, გეკარგება, ორშაბათია, გამოიწერო, გატყუებთ,
+Nearest to გინდა: მინდა, პატრულის, დალბეს, მიიღე, მოგასწრებენ, ივარჯიშებს, ტრენინგს, ჩაშალე,
+Nearest to გოგო: სოსოც, უარს, უშრობ, ჩამოგაგორონ, ბოთლი, სექტემბერს, მარლბოროს, გავიკითხავ,
+Nearest to ვშვრები: სანტიმეტრი, სოდაც, პარასკევია, გნახო, დაველაპარაკებით, მილიონს, დავისვი, ვნახავო,
+Nearest to წამოხვალ: მრავალი, დამირეკა, დეპარტამენტმა, აღარავინ, ჩასვლა, სილქნეტი, ლოვანში, ნინიმ,
+Nearest to ვისვენებ: კუხნას, მ, ამოვედი, გატესტეო, ქუჩის, ღონისძიებაა, მახოსი, მოვაძრო,
+Nearest to გვარი: ხახვზე, ვისაშია, ტვინიო, მაგდაგვარი, ყოფილი, დაიკეტაო, გადააკეთოს, საჭმელს,
+Nearest to წნევა: მეგალაინში, ფერიანებიან, კაპიკები, წვამდა, დაგიდგებით, ვეფხოს, გამომიწერე, სმა-ჭამის,
+Nearest to მაქედან: ნანის, ხუმრობებიო, ურტყამს, დანაწვავი, მომიგეს, ვიყიდე, დედიკოც, თქვეს,
+Nearest to ცოლის: მგელი, გაგო, ეკუთვნის, რვაას, ივანეს, ჟინჟილაშვილი, თევზთან, ლიანა,
+Nearest to შუა: მიხსენებ, გაგიზრდია, შტეფცელი, დავპატიჟებ, მშობელია, ვცვლიდი, გამოვარდაო, გაგარკვევინებთო,
+Averge loss at step 32000: 2.971974
+Averge loss at step 34000: 2.930059
+Averge loss at step 36000: 2.925075
+Averge loss at step 38000: 2.904876
+Averge loss at step 40000: 2.875426
+Nearest to კი: ადიდასი, ალეკო, დოლიძეზე, გვაცინა, ბატონო, მაკას, ეხვეწე, მოამზადე,
+Nearest to არ: ჩაგერთო, მოდგებიან, აღების, გადასცდა, მაღლებიც, ტრიბუნაზე, მუსიკისა, დემე,
+Nearest to შენ: გოჩ, ვეგდე, სულაც, მობილობასთან, თაკუსა, ნონასაც, პასპორტში, გიპასუხე,
+Nearest to ცოტა: ხალხიცაა, შეეშინდეს, გამაღვიძეთო, მილოცავენ, საგნებსა, მიადევნეს, ლოვანში, პრინცის,
+Nearest to სად: ნაკრების, პაროლით, აბაზანის, გასულიყო, დავწურავ, მხარ-თეძოზე, წაიღეს, ბაჩა,
+Nearest to მაშინ: დააგდო, ტუფლიო, ჩამოგაგორონ, გეკარგება, მოუგებს, გატყუებთ, მ, გამოიწერო,
+Nearest to გინდა: მინდა, პატრულის, დალბეს, ჩაშალე, მოგასწრებენ, სამტრედიის, მჯერა, დიდს,
+Nearest to გოგო: სოსოც, უშრობ, მარლბოროს, უარს, გავიკითხავ, ბოთლი, საბედნიერო, დავიყინებით,
+Nearest to ვშვრები: სანტიმეტრი, სოდაც, პარასკევია, ვნახავო, დაველაპარაკებით, გნახო, მილიონს, დავისვი,
+Nearest to წამოხვალ: დამირეკა, მრავალი, აღარავინ, დეპარტამენტმა, სილქნეტი, ჩასვლა, შემთხვევაში, ლოვანში,
+Nearest to ვისვენებ: კუხნას, მ, ამოვედი, გატესტეო, ქუჩის, მოვაძრო, ღონისძიებაა, მახოსი,
+Nearest to გვარი: ხახვზე, ვისაშია, ტვინიო, მაგდაგვარი, საჭმელს, გადააკეთოს, თანამშრომელთან, ყოფილი,
+Nearest to წნევა: დაგიდგებით, მეგალაინში, კაპიკები, ფერიანებიან, წვამდა, ვეფხოს, გაწვდებოდა, იცავდა,
+Nearest to მაქედან: ნანის, ხუმრობებიო, ურტყამს, დანაწვავი, ვიყიდე, მომიგეს, დედიკოც, თქვეს,
+Nearest to ცოლის: მგელი, გაგო, რვაას, ეკუთვნის, ივანეს, თევზთან, ივარჯიშებ, ჟინჟილაშვილი,
+Nearest to შუა: მიხსენებ, გაგიზრდია, შტეფცელი, ვცვლიდი, დავპატიჟებ, იარეთ, გაგარკვევინებთო, გამოვარდაო,
+Averge loss at step 42000: 2.876827
+Averge loss at step 44000: 2.840878
+Averge loss at step 46000: 2.837550
+Averge loss at step 48000: 2.823035
+Averge loss at step 50000: 2.798085
+Nearest to კი: ალეკო, დოლიძეზე, ადიდასი, დიდები, მაკას, გვაცინა, მიქენი, მოამზადე,
+Nearest to არ: გადასცდა, მოდგებიან, მივიყვანო, ტირილით, იშოვოო, ჩარეცხვის, გვეყოლება, მიეხმარება,
+Nearest to შენ: გოჩ, სულაც, ვეგდე, მობილობასთან, მუსტაფასთან, პასპორტში, ზედაპირზე, უღალატა,
+Nearest to ცოტა: ხალხიცაა, შეეშინდეს, ლოვანში, ქურდის, გამაღვიძეთო, არეულ-დარეული, მილოცავენ, უკვეო,
+Nearest to სად: პაროლით, აბაზანის, ნაკრების, გასულიყო, მხარ-თეძოზე, მივიღეთ, ზიხარ, ქუთაისი,
+Nearest to მაშინ: დააგდო, ტუფლიო, მოუგებს, გეკარგება, ჩამოგაგორონ, წაიყვანეთ, გატყუებთ, მ,
+Nearest to გინდა: მინდა, დალბეს, პატრულის, ჩაშალე, გადაიყვანა, მჯერა, მოგასწრებენ, ივარჯიშებს,
+Nearest to გოგო: სოსოც, უშრობ, ბოთლი, უარს, მარლბოროს, გავიკითხავ, ვისთანაც, საბედნიერო,
+Nearest to ვშვრები: სანტიმეტრი, ვნახავო, სოდაც, განათლებას, დაველაპარაკებით, პარასკევია, უხდიან, დავისვი,
+Nearest to წამოხვალ: დამირეკა, მრავალი, აღარავინ, დეპარტამენტმა, სილქნეტი, შემთხვევაში, ჩასვლა, ბაჩიები,
+Nearest to ვისვენებ: კუხნას, მ, ამოვედი, გატესტეო, ქუჩის, ჩაგვანიშნინა, მოვაძრო, პატივისცემა,
+Nearest to გვარი: ხახვზე, ტვინიო, ვისაშია, მაგდაგვარი, თანამშრომელთან, გადააკეთოს, საჭმელს, მარიამსაც,
+Nearest to წნევა: დაგიდგებით, მეგალაინში, კაპიკები, ფერიანებიან, გათენდა, აქანებს, იცავდა, გაწვდებოდა,
+Nearest to მაქედან: ნანის, ხუმრობებიო, ურტყამს, დანაწვავი, მომიგეს, ბებერს, სამშობიაროში, თქვეს,
+Nearest to ცოლის: მგელი, გაგო, რვაას, თევზთან, ივანეს, ეკუთვნის, იბანავებენ, ევროები,
+Nearest to შუა: მიხსენებ, გაგიზრდია, ვცვლიდი, შტეფცელი, იარეთ, დავპატიჟებ, გაგარკვევინებთო, გამოვარდაო,
+Averge loss at step 52000: 2.797934
+Averge loss at step 54000: 2.776871
+Averge loss at step 56000: 2.762067
+Averge loss at step 58000: 2.761553
+Averge loss at step 60000: 2.739827
+Nearest to კი: დოლიძეზე, ადიდასი, ალეკო, დიდები, გვაცინა, მაკას, ქალაქში, ბატონო,
+Nearest to არ: გადასცდა, იშოვოო, მოდგებიან, ტირილით, იერუსალიმში, მივიყვანო, მიეხმარება, იმერული,
+Nearest to შენ: გოჩ, სულაც, მობილობასთან, თაკუსა, ვეგდე, მუსტაფასთან, რაოდენობის, იცურავო,
+Nearest to ცოტა: გამაღვიძეთო, შეეშინდეს, მილოცავენ, გამოაგდებენ, მალე, მიადევნეს, ხალხიცაა, არეულ-დარეული,
+Nearest to სად: პაროლით, აბაზანის, ნაკრების, გასულიყო, სმენაში, ილო, გოგი, დავნაყო,
+Nearest to მაშინ: დააგდო, ტუფლიო, გეკარგება, მ, მუხის, გატყუებთ, მოუგებს, ქარგავს,
+Nearest to გინდა: პატრულის, ჩაშალე, დალბეს, მინდა, სამტრედიის, ივარჯიშებს, გადაიყვანა, დაგაქცევს,
+Nearest to გოგო: უშრობ, სოსოც, გავიკითხავ, ბოთლი, მარლბოროს, უარს, ვისთანაც, მირბიხარ,
+Nearest to ვშვრები: სანტიმეტრი, ვნახავო, განათლებას, უხდიან, სოდაც, პარასკევია, დაველაპარაკებით, დავისვი,
+Nearest to წამოხვალ: აღარავინ, დამირეკა, დეპარტამენტმა, მრავალი, შემთხვევაში, სილქნეტი, ბაჩიები, ჩასვლა,
+Nearest to ვისვენებ: მ, კუხნას, ამოვედი, გატესტეო, ქუჩის, ჩაგვანიშნინა, პატივისცემა, მოვიცალე,
+Nearest to გვარი: ტვინიო, მაგდაგვარი, ხახვზე, ვისაშია, ჩატარებულა, მარიამსაც, თანამშრომელთან, გადააკეთოს,
+Nearest to წნევა: დაგიდგებით, მეგალაინში, კაპიკები, გათენდა, აქანებს, ფერიანებიან, გაწვდებოდა, იცავდა,
+Nearest to მაქედან: ხუმრობებიო, ნანის, ურტყამს, დანაწვავი, სამშობიაროში, ბებერს, მომიგეს, ვშოულობდიო,
+Nearest to ცოლის: მგელი, გაგო, რვაას, თევზთან, ევროები, ივანეს, იბანავებენ, ივარჯიშებ,
+Nearest to შუა: მიხსენებ, გაგიზრდია, იარეთ, შტეფცელი, ვცვლიდი, გაგარკვევინებთო, დავპატიჟებ, გამოვარდაო,
+Averge loss at step 62000: 2.734510
+Averge loss at step 64000: 2.726919
+Averge loss at step 66000: 2.704369
+Averge loss at step 68000: 2.703333
+Averge loss at step 70000: 2.695069
+Nearest to კი: ადიდასი, დოლიძეზე, ალეკო, მაკას, დიდები, მარინაო, წაგიკითხავთ, კარტერი,
+Nearest to არ: გადასცდა, იშოვოო, იმერული, მოდგებიან, ჩართულები, მივიყვანო, იერუსალიმში, დიაგნოზის,
+Nearest to შენ: გოჩ, სულაც, მობილობასთან, ვეგდე, ზედაპირზე, მუსტაფასთან, ოთახებიაო, პასპორტში,
+Nearest to ცოტა: გამაღვიძეთო, ქურდის, ხალხიცაა, უკვეო, შეეშინდეს, მომენტებიც, საქმეც, გამოაგდებენ,
+Nearest to სად: პაროლით, აბაზანის, როდის, ნაკრების, სმენაში, გასულიყო, მხარ-თეძოზე, გასვენება,
+Nearest to მაშინ: დააგდო, ტუფლიო, გეკარგება, დამიჟინო, მ, უნახავ, ორშაბათია, მამასთან,
+Nearest to გინდა: პატრულის, ჩაშალე, დალბეს, ივარჯიშებს, გადაიყვანა, სამტრედიის, გამოუგზავნე, დაგაქცევს,
+Nearest to გოგო: უშრობ, სოსოც, მარლბოროს, გავიკითხავ, ბოთლი, ევროს, ვისთანაც, უარს,
+Nearest to ვშვრები: სანტიმეტრი, ვნახავო, უხდიან, სოდაც, განათლებას, ქნეს, პარასკევია, დაველაპარაკებით,
+Nearest to წამოხვალ: აღარავინ, დამირეკა, დეპარტამენტმა, შემთხვევაში, მრავალი, სილქნეტი, ბაჩიები, ჩასვლა,
+Nearest to ვისვენებ: მ, კუხნას, ამოვედი, ჩაგვანიშნინა, მოვიცალე, ქუჩის, პატივისცემა, გატესტეო,
+Nearest to გვარი: მაგდაგვარი, ტვინიო, ხახვზე, ვისაშია, ჩატარებულა, გადააკეთოს, მარიამსაც, თანამშრომელთან,
+Nearest to წნევა: დაგიდგებით, მეგალაინში, კაპიკები, გათენდა, აქანებს, ჯეიმსონი, იცავდა, ალიონში,
+Nearest to მაქედან: ურტყამს, ხუმრობებიო, ნანის, დანაწვავი, სამშობიაროში, ბებერს, ვშოულობდიო, მომიგეს,
+Nearest to ცოლის: მგელი, რვაას, გაგო, ევროები, თევზთან, ივანეს, იბანავებენ, ბოღმები,
+Nearest to შუა: მიხსენებ, გაგიზრდია, იარეთ, ვცვლიდი, შტეფცელი, გაგარკვევინებთო, კოჯრის, დავპატიჟებ,
+Averge loss at step 72000: 2.684197
+Averge loss at step 74000: 2.673528
+Averge loss at step 76000: 2.664039
+Averge loss at step 78000: 2.652923
+Averge loss at step 80000: 2.652928
+Nearest to კი: დოლიძეზე, ადიდასი, ალეკო, კარტერი, წაგიკითხავთ, გაბერა, მარინაო, ომარ,
+Nearest to არ: იერუსალიმში, დემე, ჩარეცხვის, მაღლებიც, სიხარულში, ჩართულები, იშოვოო, მოდგებიან,
+Nearest to შენ: გოჩ, სულაც, მობილობასთან, აუდიხარ, პასპორტში, ზედაპირზე, ანანოს, ვეგდე,
+Nearest to ცოტა: შეეშინდეს, გამაღვიძეთო, მალე, გამოაგდებენ, არეულ-დარეული, უკვეო, ხალხიცაა, იზრდებიან,
+Nearest to სად: პაროლით, აბაზანის, გასულიყო, სმენაში, ილო, ნაკრების, შპალიერი, როდის,
+Nearest to მაშინ: დააგდო, ტუფლიო, დამიჟინო, მთის, გეკარგება, მამასთან, მ, მუხის,
+Nearest to გინდა: ჩაშალე, პატრულის, დალბეს, გადაიყვანა, ივარჯიშებს, დაგაქცევს, სამტრედიის, დასაკერებელია,
+Nearest to გოგო: უშრობ, მარლბოროს, ბოთლი, გავიკითხავ, სოსოც, ვისთანაც, უარს, ევროს,
+Nearest to ვშვრები: სანტიმეტრი, უხდიან, ვნახავო, სოდაც, განათლებას, ქნეს, პარასკევია, დაველაპარაკებით,
+Nearest to წამოხვალ: აღარავინ, დეპარტამენტმა, შემთხვევაში, დამირეკა, სილქნეტი, მრავალი, ბაჩიები, ჩასვლა,
+Nearest to ვისვენებ: მ, კუხნას, ამოვედი, პატივისცემა, მოვიცალე, ჩაგვანიშნინა, ქუჩის, მოვაძრო,
+Nearest to გვარი: მაგდაგვარი, ტვინიო, ხახვზე, ჩატარებულა, ვისაშია, მარიამსაც, გადააკეთოს, იკლავდი,
+Nearest to წნევა: დაგიდგებით, გათენდა, მეგალაინში, კაპიკები, აქანებს, ჯეიმსონი, აქედანაო, ალიონში,
+Nearest to მაქედან: ურტყამს, ხუმრობებიო, სამშობიაროში, ნანის, დანაწვავი, ბებერს, ვშოულობდიო, გამოიცვლება,
+Nearest to ცოლის: მგელი, რვაას, გაგო, ევროები, თევზთან, ტოტალიზატორს, ბოღმები, იბანავებენ,
+Nearest to შუა: მიხსენებ, გაგიზრდია, იარეთ, გაგარკვევინებთო, ვცვლიდი, შტეფცელი, კოჯრის, გამეთიშა,
+Averge loss at step 82000: 2.636598
+Averge loss at step 84000: 2.632281
+Averge loss at step 86000: 2.625475
+Averge loss at step 88000: 2.615956
+Averge loss at step 90000: 2.610146
+Nearest to კი: დოლიძეზე, ადიდასი, ალეკო, წაგიკითხავთ, დადგმებსაც, გაბერა, კარტერი, თეთრეულიც,
+Nearest to არ: მაღლებიც, დემე, ჩაგერთო, სიხარულში, ჩართულები, ჩაგწერსო, აღარ, იმერული,
+Nearest to შენ: გოჩ, სულაც, მობილობასთან, ზედაპირზე, ვეგდე, ოთახებიაო, დღისითაც, პასპორტში,
+Nearest to ცოტა: გამაღვიძეთო, უკვეო, საქმეც, შეეშინდეს, მალე, მიადევნეს, მომენტებიც, გამოაგდებენ,
+Nearest to სად: პაროლით, აბაზანის, როდის, უშენოდ, სმენაში, შპალიერი, ილო, გასულიყო,
+Nearest to მაშინ: დააგდო, გეკარგება, ტუფლიო, მთის, ორშაბათია, დამიჟინო, მამასთან, მუხის,
+Nearest to გინდა: დალბეს, პატრულის, ჩაშალე, სამტრედიის, გადაიყვანა, ივარჯიშებს, მშობლებიო, დასაკერებელია,
+Nearest to გოგო: უშრობ, მარლბოროს, გავიკითხავ, ბოთლი, ვისთანაც, სოსოც, ევროს, უარს,
+Nearest to ვშვრები: სანტიმეტრი, უხდიან, ვნახავო, განათლებას, ქნეს, სოდაც, დაგელაპარაკე, პარასკევია,
+Nearest to წამოხვალ: აღარავინ, დეპარტამენტმა, შემთხვევაში, დამირეკა, სილქნეტი, ბაჩიები, დასცილდა, მრავალი,
+Nearest to ვისვენებ: მ, კუხნას, მოვიცალე, ამოვედი, პატივისცემა, ჩაგვანიშნინა, გვინელებს, დაგეხმარება,
+Nearest to გვარი: მაგდაგვარი, ტვინიო, ჩატარებულა, ხახვზე, ვისაშია, მარიამსაც, საკეისროს, იკლავდი,
+Nearest to წნევა: დაგიდგებით, მეგალაინში, გათენდა, კაპიკები, აქანებს, ჯეიმსონი, დაწითლებული, აქედანაო,
+Nearest to მაქედან: ურტყამს, ხუმრობებიო, სამშობიაროში, ბებერს, ნანის, დანაწვავი, ვშოულობდიო, გამოგართმევო,
+Nearest to ცოლის: მგელი, რვაას, გაგო, ტოტალიზატორს, ევროები, ბოღმები, აიყვანეს, თევზთან,
+Nearest to შუა: მიხსენებ, იარეთ, გაგიზრდია, გაგარკვევინებთო, ვცვლიდი, კოჯრის, შტეფცელი, გამეთიშა,
+Averge loss at step 92000: 2.599451
+Averge loss at step 94000: 2.595236
+Averge loss at step 96000: 2.593307
+Averge loss at step 98000: 2.583408
+Averge loss at step 100000: 2.573128
+Nearest to კი: დოლიძეზე, ალეკო, კარტერი, დადგმებსაც, ადიდასი, ეხვეწე, წაგიკითხავთ, გაბერა,
+Nearest to არ: ჩაგერთო, მაღლებიც, დემე, ჩართულები, აღარ, გადასცდა, მუსიკისა, დაგრჩენიათ,
+Nearest to შენ: გოჩ, მობილობასთან, სულაც, თაკუსა, ზედაპირზე, ვეგდე, აუდიხარ, პასპორტში,
+Nearest to ცოტა: გამაღვიძეთო, საქმეც, მიადევნეს, შეეშინდეს, მალე, გამოაგდებენ, უკვეო, მომენტებიც,
+Nearest to სად: პაროლით, აბაზანის, შპალიერი, გასულიყო, უშენოდ, ნაკრების, გასვენება, ილო,
+Nearest to მაშინ: დააგდო, მთის, დამიჟინო, ტუფლიო, მამასთან, ორშაბათია, მუხის, გეკარგება,
+Nearest to გინდა: დალბეს, პატრულის, ჩაშალე, გადაიყვანა, სამტრედიის, გეცლება, გამოუგზავნე, დასაკერებელია,
+Nearest to გოგო: გავიკითხავ, უშრობ, ბოთლი, სოსოც, მარლბოროს, ევროს, აბსურდი, ვისთანაც,
+Nearest to ვშვრები: უხდიან, სანტიმეტრი, ვნახავო, განათლებას, ქნეს, დაგელაპარაკე, მულმა, პროგნოზს,
+Nearest to წამოხვალ: აღარავინ, შემთხვევაში, დეპარტამენტმა, დამირეკა, სილქნეტი, ბაჩიები, დასცილდა, მაავებელ,
+Nearest to ვისვენებ: მ, პატივისცემა, მოვიცალე, ამოვედი, კუხნას, ჩაგვანიშნინა, გვინელებს, დაგეხმარება,
+Nearest to გვარი: მაგდაგვარი, ტვინიო, ჩატარებულა, ხახვზე, საკეისროს, მარიამსაც, მასწავლებელთანაც, ვისაშია,
+Nearest to წნევა: დაგიდგებით, გათენდა, მეგალაინში, კაპიკები, აქანებს, ჯეიმსონი, იწერენო, მაშოა,
+Nearest to მაქედან: ურტყამს, ხუმრობებიო, სამშობიაროში, ბებერს, დანაწვავი, ვშოულობდიო, ნანის, რაფრა,
+Nearest to ცოლის: მგელი, რვაას, გაგო, ტოტალიზატორს, ბოღმები, თევზთან, აიყვანეს, ასტანა,
+Nearest to შუა: მიხსენებ, იარეთ, გაგიზრდია, გაგარკვევინებთო, ვცვლიდი, კოჯრის, შტეფცელი, გამეთიშა,
+Epoch: 1 Learning rate: 1.000
+0.036 perplexity: 10663.138 speed: 8073 wps
+0.135 perplexity: 3878.650 speed: 13860 wps
+0.234 perplexity: 2479.025 speed: 16128 wps
+0.332 perplexity: 1902.949 speed: 17266 wps
+0.431 perplexity: 1632.406 speed: 17977 wps
+0.529 perplexity: 1432.852 speed: 18454 wps
+0.628 perplexity: 1302.826 speed: 18792 wps
+0.726 perplexity: 1202.488 speed: 19050 wps
+0.825 perplexity: 1125.229 speed: 19246 wps
+0.923 perplexity: 1063.807 speed: 19399 wps
+Epoch: 1 Train Perplexity: 1022.203
+Epoch: 1 Valid Perplexity: 370.099
+Epoch: 2 Learning rate: 1.000
+0.036 perplexity: 590.519 speed: 20953 wps
+0.135 perplexity: 621.634 speed: 20789 wps
+0.234 perplexity: 603.336 speed: 20806 wps
+0.332 perplexity: 579.739 speed: 20813 wps
+0.431 perplexity: 569.159 speed: 20753 wps
+0.529 perplexity: 560.452 speed: 20768 wps
+0.628 perplexity: 554.548 speed: 20778 wps
+0.726 perplexity: 544.377 speed: 20760 wps
+0.825 perplexity: 538.614 speed: 20764 wps
+0.923 perplexity: 533.750 speed: 20752 wps
+Epoch: 2 Train Perplexity: 528.792
+Epoch: 2 Valid Perplexity: 291.456
+Epoch: 3 Learning rate: 1.000
+0.036 perplexity: 451.642 speed: 20657 wps
+0.135 perplexity: 473.943 speed: 20725 wps
+0.234 perplexity: 468.483 speed: 20752 wps
+0.332 perplexity: 451.562 speed: 20721 wps
+0.431 perplexity: 450.357 speed: 20730 wps
+0.529 perplexity: 446.188 speed: 20709 wps
+0.628 perplexity: 445.243 speed: 20703 wps
+0.726 perplexity: 441.096 speed: 20715 wps
+0.825 perplexity: 439.764 speed: 20730 wps
+0.923 perplexity: 436.462 speed: 20727 wps
+Epoch: 3 Train Perplexity: 432.693
+Epoch: 3 Valid Perplexity: 268.686
+Epoch: 4 Learning rate: 1.000
+0.036 perplexity: 388.542 speed: 20578 wps
+0.135 perplexity: 407.910 speed: 20717 wps
+0.234 perplexity: 400.958 speed: 20706 wps
+0.332 perplexity: 390.005 speed: 20737 wps
+0.431 perplexity: 389.422 speed: 20713 wps
+0.529 perplexity: 385.464 speed: 20703 wps
+0.628 perplexity: 383.263 speed: 20715 wps
+0.726 perplexity: 380.452 speed: 20706 wps
+0.825 perplexity: 378.563 speed: 20701 wps
+0.923 perplexity: 376.559 speed: 20700 wps
+Epoch: 4 Train Perplexity: 373.305
+Epoch: 4 Valid Perplexity: 229.127
+Epoch: 5 Learning rate: 0.800
+0.036 perplexity: 311.396 speed: 20697 wps
+0.135 perplexity: 330.418 speed: 20650 wps
+0.234 perplexity: 328.398 speed: 20691 wps
+0.332 perplexity: 320.046 speed: 20632 wps
+0.431 perplexity: 318.904 speed: 20641 wps
+0.529 perplexity: 316.244 speed: 20680 wps
+0.628 perplexity: 315.588 speed: 20660 wps
+0.726 perplexity: 313.739 speed: 20673 wps
+0.825 perplexity: 312.215 speed: 20674 wps
+0.923 perplexity: 310.939 speed: 20655 wps
+Epoch: 5 Train Perplexity: 308.633
+Epoch: 5 Valid Perplexity: 226.060
+Epoch: 6 Learning rate: 0.640
+0.036 perplexity: 276.780 speed: 20808 wps
+0.135 perplexity: 292.362 speed: 20771 wps
+0.234 perplexity: 287.797 speed: 20707 wps
+0.332 perplexity: 279.433 speed: 20712 wps
+0.431 perplexity: 277.969 speed: 20676 wps
+0.529 perplexity: 274.966 speed: 20671 wps
+0.628 perplexity: 274.498 speed: 20672 wps
+0.726 perplexity: 272.816 speed: 20655 wps
+0.825 perplexity: 271.219 speed: 20664 wps
+0.923 perplexity: 269.822 speed: 20673 wps
+Epoch: 6 Train Perplexity: 267.638
+Epoch: 6 Valid Perplexity: 223.083
+Epoch: 7 Learning rate: 0.512
+0.036 perplexity: 249.570 speed: 20516 wps
+0.135 perplexity: 261.803 speed: 20597 wps
+0.234 perplexity: 258.099 speed: 20628 wps
+0.332 perplexity: 250.984 speed: 20638 wps
+0.431 perplexity: 249.774 speed: 20496 wps
+0.529 perplexity: 246.712 speed: 20507 wps
+0.628 perplexity: 245.905 speed: 20517 wps
+0.726 perplexity: 244.369 speed: 20536 wps
+0.825 perplexity: 242.633 speed: 20529 wps
+0.923 perplexity: 241.056 speed: 20551 wps
+Epoch: 7 Train Perplexity: 239.256
+Epoch: 7 Valid Perplexity: 226.908
+Epoch: 8 Learning rate: 0.410
+0.036 perplexity: 226.709 speed: 20608 wps
+0.135 perplexity: 239.050 speed: 20471 wps
+0.234 perplexity: 234.967 speed: 20569 wps
+0.332 perplexity: 228.765 speed: 20599 wps
+0.431 perplexity: 227.238 speed: 20623 wps
+0.529 perplexity: 224.829 speed: 20618 wps
+0.628 perplexity: 223.846 speed: 20602 wps
+0.726 perplexity: 222.136 speed: 20595 wps
+0.825 perplexity: 220.551 speed: 20591 wps
+0.923 perplexity: 218.957 speed: 20597 wps
+Epoch: 8 Train Perplexity: 217.290
+Epoch: 8 Valid Perplexity: 227.277
+Epoch: 9 Learning rate: 0.328
+0.036 perplexity: 209.692 speed: 20657 wps
+0.135 perplexity: 219.232 speed: 20587 wps
+0.234 perplexity: 215.600 speed: 20570 wps
+0.332 perplexity: 210.478 speed: 20603 wps
+0.431 perplexity: 209.026 speed: 20620 wps
+0.529 perplexity: 206.487 speed: 20651 wps
+0.628 perplexity: 205.553 speed: 20642 wps
+0.726 perplexity: 204.057 speed: 20633 wps
+0.825 perplexity: 202.557 speed: 20643 wps
+0.923 perplexity: 201.064 speed: 20650 wps
+Epoch: 9 Train Perplexity: 199.492
+Epoch: 9 Valid Perplexity: 229.084
+Epoch: 10 Learning rate: 0.262
+0.036 perplexity: 195.238 speed: 20380 wps
+0.135 perplexity: 204.028 speed: 20592 wps
+0.234 perplexity: 200.547 speed: 20585 wps
+0.332 perplexity: 195.739 speed: 20649 wps
+0.431 perplexity: 194.153 speed: 20637 wps
+0.529 perplexity: 191.883 speed: 20635 wps
+0.628 perplexity: 190.983 speed: 20631 wps
+0.726 perplexity: 189.524 speed: 20639 wps
+0.825 perplexity: 188.025 speed: 20608 wps
+0.923 perplexity: 186.628 speed: 20601 wps
+Epoch: 10 Train Perplexity: 185.131
+Epoch: 10 Valid Perplexity: 231.374
+Epoch: 11 Learning rate: 0.210
+0.036 perplexity: 183.697 speed: 20248 wps
+0.135 perplexity: 191.660 speed: 20543 wps
+0.234 perplexity: 188.660 speed: 20585 wps
+0.332 perplexity: 184.259 speed: 20601 wps
+0.431 perplexity: 182.684 speed: 20554 wps
+0.529 perplexity: 180.531 speed: 20570 wps
+0.628 perplexity: 179.686 speed: 20587 wps
+0.726 perplexity: 178.362 speed: 20584 wps
+0.825 perplexity: 176.989 speed: 20604 wps
+0.923 perplexity: 175.500 speed: 20630 wps
+Epoch: 11 Train Perplexity: 174.079
+Epoch: 11 Valid Perplexity: 233.814
+Epoch: 12 Learning rate: 0.168
+0.036 perplexity: 173.214 speed: 20578 wps
+0.135 perplexity: 181.340 speed: 20506 wps
+0.234 perplexity: 178.588 speed: 20588 wps
+0.332 perplexity: 174.689 speed: 20594 wps
+0.431 perplexity: 173.179 speed: 20613 wps
+0.529 perplexity: 171.082 speed: 20636 wps
+0.628 perplexity: 170.194 speed: 20621 wps
+0.726 perplexity: 168.920 speed: 20620 wps
+0.825 perplexity: 167.645 speed: 20632 wps
+0.923 perplexity: 166.221 speed: 20635 wps
+Epoch: 12 Train Perplexity: 164.883
+Epoch: 12 Valid Perplexity: 235.123
+Epoch: 13 Learning rate: 0.134
+0.036 perplexity: 166.544 speed: 20340 wps
+0.135 perplexity: 173.128 speed: 20472 wps
+0.234 perplexity: 170.635 speed: 20542 wps
+0.332 perplexity: 166.915 speed: 20593 wps
+0.431 perplexity: 165.448 speed: 20561 wps
+0.529 perplexity: 163.634 speed: 20564 wps
+0.628 perplexity: 162.886 speed: 20583 wps
+0.726 perplexity: 161.622 speed: 20602 wps
+0.825 perplexity: 160.444 speed: 20597 wps
+0.923 perplexity: 159.127 speed: 20535 wps
+Epoch: 13 Train Perplexity: 157.875
+Epoch: 13 Valid Perplexity: 236.894
+Epoch: 14 Learning rate: 0.107
+0.036 perplexity: 158.326 speed: 20601 wps
+0.135 perplexity: 167.002 speed: 20670 wps
+0.234 perplexity: 164.670 speed: 20671 wps
+0.332 perplexity: 161.256 speed: 20644 wps
+0.431 perplexity: 159.460 speed: 20631 wps
+0.529 perplexity: 157.794 speed: 20635 wps
+0.628 perplexity: 156.942 speed: 20640 wps
+0.726 perplexity: 155.842 speed: 20640 wps
+0.825 perplexity: 154.583 speed: 20615 wps
+0.923 perplexity: 153.356 speed: 20620 wps
+Epoch: 14 Train Perplexity: 152.210
+Epoch: 14 Valid Perplexity: 238.327
+Epoch: 15 Learning rate: 0.086
+0.036 perplexity: 153.191 speed: 20640 wps
+0.135 perplexity: 161.840 speed: 20590 wps
+0.234 perplexity: 159.992 speed: 20639 wps
+0.332 perplexity: 156.619 speed: 20593 wps
+0.431 perplexity: 155.052 speed: 20592 wps
+0.529 perplexity: 153.375 speed: 20587 wps
+0.628 perplexity: 152.508 speed: 20598 wps
+0.726 perplexity: 151.437 speed: 20598 wps
+0.825 perplexity: 150.160 speed: 20609 wps
+0.923 perplexity: 149.059 speed: 20589 wps
+Epoch: 15 Train Perplexity: 147.960
+Epoch: 15 Valid Perplexity: 239.609
+Epoch: 16 Learning rate: 0.069
+0.036 perplexity: 151.730 speed: 20670 wps
+0.135 perplexity: 158.910 speed: 20679 wps
+0.234 perplexity: 156.466 speed: 20676 wps
+0.332 perplexity: 153.460 speed: 20673 wps
+0.431 perplexity: 151.790 speed: 20667 wps
+0.529 perplexity: 150.258 speed: 20660 wps
+0.628 perplexity: 149.312 speed: 20662 wps
+0.726 perplexity: 148.287 speed: 20668 wps
+0.825 perplexity: 147.040 speed: 20668 wps
+0.923 perplexity: 145.878 speed: 20674 wps
+Epoch: 16 Train Perplexity: 144.789
+Epoch: 16 Valid Perplexity: 239.957
+Epoch: 17 Learning rate: 0.055
+0.036 perplexity: 147.542 speed: 20816 wps
+0.135 perplexity: 155.216 speed: 20661 wps
+0.234 perplexity: 153.057 speed: 20677 wps
+0.332 perplexity: 150.118 speed: 20665 wps
+0.431 perplexity: 148.607 speed: 20670 wps
+0.529 perplexity: 147.212 speed: 20669 wps
+0.628 perplexity: 146.420 speed: 20682 wps
+0.726 perplexity: 145.394 speed: 20657 wps
+0.825 perplexity: 144.244 speed: 20669 wps
+0.923 perplexity: 143.046 speed: 20669 wps
+Epoch: 17 Train Perplexity: 141.934
+Epoch: 17 Valid Perplexity: 242.020
+Epoch: 18 Learning rate: 0.044
+0.036 perplexity: 145.153 speed: 20642 wps
+0.135 perplexity: 152.543 speed: 20647 wps
+0.234 perplexity: 151.034 speed: 20667 wps
+0.332 perplexity: 148.008 speed: 20694 wps
+0.431 perplexity: 146.474 speed: 20674 wps
+0.529 perplexity: 145.029 speed: 20667 wps
+0.628 perplexity: 144.200 speed: 20675 wps
+0.726 perplexity: 143.283 speed: 20649 wps
+0.825 perplexity: 142.156 speed: 20637 wps
+0.923 perplexity: 140.991 speed: 20628 wps
+Epoch: 18 Train Perplexity: 139.902
+Epoch: 18 Valid Perplexity: 242.059
+Epoch: 19 Learning rate: 0.035
+0.036 perplexity: 144.066 speed: 20677 wps
+0.135 perplexity: 151.099 speed: 20712 wps
+0.234 perplexity: 149.356 speed: 20699 wps
+0.332 perplexity: 146.658 speed: 20710 wps
+0.431 perplexity: 145.235 speed: 20738 wps
+0.529 perplexity: 143.638 speed: 20695 wps
+0.628 perplexity: 142.761 speed: 20674 wps
+0.726 perplexity: 141.834 speed: 20670 wps
+0.825 perplexity: 140.583 speed: 20671 wps
+0.923 perplexity: 139.422 speed: 20667 wps
+Epoch: 19 Train Perplexity: 138.326
+Epoch: 19 Valid Perplexity: 242.438
+Epoch: 20 Learning rate: 0.028
+0.036 perplexity: 143.123 speed: 20563 wps
+0.135 perplexity: 150.118 speed: 20581 wps
+0.234 perplexity: 147.625 speed: 20394 wps
+0.332 perplexity: 144.917 speed: 20464 wps
+0.431 perplexity: 143.473 speed: 20516 wps
+0.529 perplexity: 141.998 speed: 20538 wps
+0.628 perplexity: 141.166 speed: 20552 wps
+0.726 perplexity: 140.220 speed: 20572 wps
+0.825 perplexity: 139.126 speed: 20574 wps
+0.923 perplexity: 137.956 speed: 20572 wps
+Epoch: 20 Train Perplexity: 136.980
+Epoch: 20 Valid Perplexity: 242.500
+Epoch: 21 Learning rate: 0.023
+0.036 perplexity: 145.514 speed: 20553 wps
+0.135 perplexity: 149.726 speed: 20681 wps
+0.234 perplexity: 146.250 speed: 20627 wps
+0.332 perplexity: 143.764 speed: 20641 wps
+0.431 perplexity: 142.463 speed: 20627 wps
+0.529 perplexity: 140.912 speed: 20648 wps
+0.628 perplexity: 140.048 speed: 20645 wps
+0.726 perplexity: 139.026 speed: 20663 wps
+0.825 perplexity: 137.931 speed: 20649 wps
+0.923 perplexity: 136.782 speed: 20648 wps
+Epoch: 21 Train Perplexity: 135.809
+Epoch: 21 Valid Perplexity: 242.685
+Epoch: 22 Learning rate: 0.018
+0.036 perplexity: 145.209 speed: 20523 wps
+0.135 perplexity: 149.123 speed: 20650 wps
+0.234 perplexity: 145.509 speed: 20678 wps
+0.332 perplexity: 142.921 speed: 20713 wps
+0.431 perplexity: 141.358 speed: 20732 wps
+0.529 perplexity: 139.826 speed: 20711 wps
+0.628 perplexity: 139.042 speed: 20693 wps
+0.726 perplexity: 138.059 speed: 20694 wps
+0.825 perplexity: 136.968 speed: 20632 wps
+0.923 perplexity: 135.856 speed: 20632 wps
+Epoch: 22 Train Perplexity: 134.874
+Epoch: 22 Valid Perplexity: 243.087
+Epoch: 23 Learning rate: 0.014
+0.036 perplexity: 143.406 speed: 20503 wps
+0.135 perplexity: 148.237 speed: 20722 wps
+0.234 perplexity: 144.848 speed: 20799 wps
+0.332 perplexity: 142.274 speed: 20771 wps
+0.431 perplexity: 140.979 speed: 20757 wps
+0.529 perplexity: 139.475 speed: 20762 wps
+0.628 perplexity: 138.680 speed: 20751 wps
+0.726 perplexity: 137.660 speed: 20746 wps
+0.825 perplexity: 136.535 speed: 20755 wps
+0.923 perplexity: 135.355 speed: 20761 wps
+Epoch: 23 Train Perplexity: 134.398
+Epoch: 23 Valid Perplexity: 243.175
+Epoch: 24 Learning rate: 0.012
+0.036 perplexity: 141.360 speed: 20680 wps
+0.135 perplexity: 147.671 speed: 20819 wps
+0.234 perplexity: 144.538 speed: 20803 wps
+0.332 perplexity: 142.014 speed: 20782 wps
+0.431 perplexity: 140.688 speed: 20764 wps
+0.529 perplexity: 139.013 speed: 20779 wps
+0.628 perplexity: 138.221 speed: 20757 wps
+0.726 perplexity: 137.240 speed: 20763 wps
+0.825 perplexity: 136.035 speed: 20772 wps
+0.923 perplexity: 134.820 speed: 20771 wps
+Epoch: 24 Train Perplexity: 133.835
+Epoch: 24 Valid Perplexity: 243.316
+Epoch: 25 Learning rate: 0.009
+0.036 perplexity: 141.697 speed: 20862 wps
+0.135 perplexity: 146.784 speed: 20810 wps
+0.234 perplexity: 143.896 speed: 20893 wps
+0.332 perplexity: 141.142 speed: 20874 wps
+0.431 perplexity: 139.751 speed: 20862 wps
+0.529 perplexity: 138.304 speed: 20871 wps
+0.628 perplexity: 137.432 speed: 20884 wps
+0.726 perplexity: 136.389 speed: 20871 wps
+0.825 perplexity: 135.309 speed: 20884 wps
+0.923 perplexity: 134.140 speed: 20830 wps
+Epoch: 25 Train Perplexity: 133.157
+Epoch: 25 Valid Perplexity: 243.451
+Saving model to data/lstm_skipgram/rnnlm.
