@@ -24,6 +24,13 @@ Most of the scripts are in `babel/s5d` and `wsj/s5/steps`.
 
 * * *
 
+### Relevant Toolkits
++ [XenC](https://github.com/antho-rousseau/XenC): an open-source tool for data selection in Natural Language Processing.
++ [GloVe](https://github.com/stanfordnlp/GloVe): Global Vectors for Word Representation.
++ [SRILM](http://www.speech.sri.com/projects/srilm/): an Extensible Language Modeling Toolkit.
+
+* * *
+
 ### Contact
 Any questions please send e-mails to charlesliutop@gmail.com.
 
