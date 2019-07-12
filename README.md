@@ -1,12 +1,13 @@
 ## Low-resourced Language Modeling based on Kaldi
 
 This repository provides Kaldi users with a few useful scripts for **language modeling**, especially for **low-resourced conditions**.
-
-![image](http://nbviewer.jupyter.org/github/charlesliucn/kaldi-lm/blob/master/misc/logo/framework.png)
-
-The scripts are mainly based on `babel/s5d` in `./egs` directory.
+The scripts are mainly based on `babel/s5d` in `egs` directory.
 
 Most of the scripts are in `babel/s5d` and `wsj/s5/steps`.
+
+>>> Currently, the scripts are not so well organized. A document of detailed usage of these scripts will be added later.
+
+![image](http://nbviewer.jupyter.org/github/charlesliucn/LanMIT/blob/master/misc/logo/framework.png)
 
 * * *
 
@@ -19,8 +20,9 @@ Most of the scripts are in `babel/s5d` and `wsj/s5/steps`.
 	- **Linear Interpolation** for N-Gram models
 	- N-Gram Language Model for **Rescoring**
 + LSTM Language Model Based on Tensorflow
-	- Word Vectors **Pre-training**
+	- Word Vectors **Pre-training** for RNN/LSTM Language Model Training
 	- LSTM Language Model for **Rescoring**
+
 
 * * *
 
