@@ -5,7 +5,7 @@ The scripts are mainly based on `babel/s5d` in `egs` directory.
 
 Most of the scripts are in `babel/s5d` and `wsj/s5/steps`.
 
->>> Currently, the scripts are not so well organized. A document of detailed usage of these scripts will be added later.
+> Currently, the scripts are not so well organized. A document of detailed usage of these scripts will be added later.
 
 ![image](http://nbviewer.jupyter.org/github/charlesliucn/LanMIT/blob/master/misc/logo/framework.png)
 
